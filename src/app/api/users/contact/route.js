@@ -7,7 +7,6 @@ import Contact from '@/models/contactModel';
 
 export async function POST(request) {
     try {
-        console.log(request);
         const reqBody = await request.json();
         const { name, email, subject, message } = reqBody;
         if (!name || !email || !subject || !message) {
@@ -25,7 +24,6 @@ export async function POST(request) {
             message: message
         })
         const response = await contact.save();
-        console.log(response);
         return NextResponse.json({
             status: true,
             response: "message send successfully",
