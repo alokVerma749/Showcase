@@ -1,6 +1,13 @@
 import React from 'react'
 
-const Card = ({ project }) => {
+const Card = () => {
+    const project = {
+        image: "isi",
+        name: "Hello",
+        description: "dojcnd",
+        liveLink: "eokcd",
+        githubLink: "sochdj"
+    }
     return (
         <div className="bg-white rounded-lg shadow-md p-4">
             <img

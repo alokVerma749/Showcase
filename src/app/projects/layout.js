@@ -1,12 +1,11 @@
-import React from 'react'
 import Card from './components/card'
 
 const Layout = ({ children }) => {
     return (
-        <div>
+        <>
             <HeroSection />
             {children}
-        </div>
+        </>
     )
 }
 

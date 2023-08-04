@@ -1,5 +1,17 @@
+'use client'
 import Link from "next/link"
+import Card from "@/app/components/Card"
+import { TAGS, mockData } from "@/utils/mockdata"
+import { useState } from "react"
 export default function Home() {
+  const [data, setData] = useState(mockData)
+  const filter = (tag) => {
+    if (tag === "All") {
+      return setData(mockData)
+    }
+    const filteredResults = mockData.filter((data) => data.tags.includes(tag))
+    setData(filteredResults);
+  }
   return (
     <main className="hero p-5">
       <div className="hero flex flex-row justify-around mb-5">
@@ -50,6 +62,26 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </main>
+
+      <section className="projects">
+        <div className="filter"></div>
+        <div className="project_container">
+          <p className="text-center text-3xl font-semibold m-3">Top Showcase</p>
+
+          <div className="filter_btns mb-3 flex flex-row justify-around scroll-smooth snap-mandatory snap-x snap-center overflow-auto max-w-full space-x-3 ">
+            {
+              TAGS.map((tag, index) => {
+                return <button key={index} onClick={() => filter(tag)} className="bg-slate-400 text-white p-2 text-sm font-medium rounded-xl">{tag}</button>
+              })
+            }
+          </div>
+          <div className="cards flex flex-wrap flex-row">
+            {
+              data.map((data) => <Card key={data.id} data={data} />)
+            }
+          </div>
+        </div>
+      </section>
+    </main >
   )
 }

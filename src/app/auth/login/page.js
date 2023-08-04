@@ -17,7 +17,7 @@ const Login = () => {
     const submitData = async () => {
         try {
             const res = await axios.post('/api/users/auth/login', userData);
-            res.data.success && router.push("/profile")
+            res.data.success && router.push("/profile");
         } catch (error) {
             console.log(error.message);
         } finally {
