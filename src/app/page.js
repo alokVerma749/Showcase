@@ -1,16 +1,24 @@
 'use client'
-import Link from "next/link"
 import Card from "@/app/components/Card"
 import { TAGS, mockData } from "@/utils/mockdata"
 import { useState } from "react"
+import AddNewProject from "./components/AddNewProject";
 export default function Home() {
-  const [data, setData] = useState(mockData)
+  const [data, setData] = useState(mockData);
+  const [isFormVisible, setIsFormVisible] = useState(false)
   const filter = (tag) => {
     if (tag === "All") {
       return setData(mockData)
     }
     const filteredResults = mockData.filter((data) => data.tags.includes(tag))
     setData(filteredResults);
+  }
+  const handleFloatingButtonClick = () => {
+    if (isFormVisible) {
+      setIsFormVisible(false)
+    } else {
+      setIsFormVisible(true)
+    }
   }
   return (
     <main className="hero p-5">
@@ -19,7 +27,8 @@ export default function Home() {
         <div className="right w-1/2 border border-red-500 h-96">img</div>
       </div>
 
-      <section className="bg-gray-100 text-gray-800">
+      {/* Trash Section */}
+      {/* <section className="bg-gray-100 text-gray-800">
         <div className="container p-6 mx-auto space-y-6 text-center lg:p-8 lg:space-y-8">
           <h2 className="text-3xl font-bold">Projects build with</h2>
           <div className="flex flex-wrap justify-center lg:justify-between">
@@ -61,11 +70,21 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section className="projects">
         <div className="filter"></div>
         <div className="project_container">
+          {/* Floating Button */}
+          <button
+            className="fixed bottom-5 right-5 bg-blue-500 p-4 text-white rounded-full shadow-lg"
+            onClick={handleFloatingButtonClick}
+          >
+            Add Project
+          </button>
+          {
+            isFormVisible && <AddNewProject />
+          }
           <p className="text-center text-3xl font-semibold m-3">Top Showcase</p>
 
           <div className="filter_btns mb-3 flex flex-row justify-around scroll-smooth snap-mandatory snap-x snap-center overflow-auto max-w-full space-x-3 ">
