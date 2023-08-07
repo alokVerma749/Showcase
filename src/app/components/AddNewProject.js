@@ -15,12 +15,12 @@ const AddNewProject = () => {
     useAuthorise();
     const handleSubmit = (event) => {
         event.preventDefault();
-        // setProject({
-        //     title: "",
-        //     description: "",
-        //     tags: [],
-        //     thumbnail: "",
-        // })
+        setProject({
+            title: "",
+            description: "",
+            tags: [],
+            thumbnail: "",
+        })
         submitProject()
     };
 
@@ -29,7 +29,6 @@ const AddNewProject = () => {
             project,
             email: user.email
         });
-        console.log(res)
     }
     return (
         <form

@@ -2,8 +2,6 @@ import { NextResponse } from 'next/server'
 
 export function middleware(request) {
     const path = request.nextUrl.pathname;
-
-    console.log(path);
     const isPublicPath = path === "/auth/login" || path === "/auth/signup"
     const privatePath = path.startsWith("/profile");
     const token = request.cookies.get("token")?.value || ""
