@@ -1,27 +1,10 @@
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
 import useAuthorise from '../auth/hooks/useAuthorise'
-import { login } from '@/utils/slices/userSlice'
-import { useEffect } from 'react'
 
 const Header = () => {
     const user = useSelector((store) => store.user.user)
-    const dispatch = useDispatch()
-    useEffect(() => {
-        fetchAuthoriseData();
-    }, [])
-    const fetchAuthoriseData = async () => {
-        const data = await useAuthorise();
-        data ? dispatch(login({
-            name: data.name,
-            email: data.email,
-            isLoggedIn: true
-        })) : dispatch(login({
-            name: '',
-            email: "",
-            isLoggedIn: true
-        }))
-    }
+    useAuthorise();
     return (
         <header className='bg-teal-200 text-zinc-600 p-5 flex flex-row justify-between items-center sticky top-0 z-10  '>
             <div className="logo border border-red-500 w-52 text-center p-2">LOGO</div>

@@ -2,8 +2,7 @@
 import axios from "axios"
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { login, logout } from "@/utils/slices/userSlice";
-import { useEffect } from "react";
+import { logout } from "@/utils/slices/userSlice";
 import useAuthorise from "../auth/hooks/useAuthorise";
 const Profile = () => {
     const router = useRouter();
@@ -21,23 +20,7 @@ const Profile = () => {
             isLoggedIn: false
         }))
     }
-
-    useEffect(() => {
-        fetchAuthoriseData();
-    }, [])
-    const fetchAuthoriseData = async () => {
-        const data = await useAuthorise();
-        data ? dispatch(login({
-            name: data.name,
-            email: data.email,
-            isLoggedIn: true
-        })) : dispatch(login({
-            name: '',
-            email: "",
-            isLoggedIn: true
-        }))
-    }
-
+    useAuthorise()
     return (
         <div>
             {
