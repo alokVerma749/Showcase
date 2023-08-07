@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const projectSchema = new mongoose.Schema({
+    userEmail: {
+        type: String,
+        required: [true, "user email missing"]
+    },
     title: {
         type: String,
         required: [true, "title is required"]

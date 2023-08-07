@@ -3,9 +3,12 @@ import Card from "@/app/components/Card"
 import { TAGS, mockData } from "@/utils/mockdata"
 import { useState } from "react"
 import AddNewProject from "./components/AddNewProject";
+import { useSelector } from "react-redux";
+
 export default function Home() {
   const [data, setData] = useState(mockData);
   const [isFormVisible, setIsFormVisible] = useState(false)
+
   const filter = (tag) => {
     if (tag === "All") {
       return setData(mockData)
@@ -13,6 +16,7 @@ export default function Home() {
     const filteredResults = mockData.filter((data) => data.tags.includes(tag))
     setData(filteredResults);
   }
+
   const handleFloatingButtonClick = () => {
     if (isFormVisible) {
       setIsFormVisible(false)
@@ -20,6 +24,9 @@ export default function Home() {
       setIsFormVisible(true)
     }
   }
+
+  const user = useSelector(store => store.user.user);
+
   return (
     <main className="hero p-5">
       <div className="hero flex flex-row justify-around mb-5">
@@ -75,12 +82,14 @@ export default function Home() {
       <section className="projects">
         <div className="project_container">
           {/* Floating Button */}
-          <button
-            className="fixed bottom-5 right-5 bg-blue-500 p-4 text-white rounded-full shadow-lg"
-            onClick={handleFloatingButtonClick}
-          >
-            Add Project
-          </button>
+          {
+            (user.isLoggedIn) && <button
+              className="fixed bottom-5 right-5 bg-blue-500 p-4 text-white rounded-full shadow-lg"
+              onClick={handleFloatingButtonClick}
+            >
+              Add Project
+            </button>
+          }
           {
             isFormVisible && <AddNewProject />
           }

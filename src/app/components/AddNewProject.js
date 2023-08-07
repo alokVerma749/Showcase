@@ -1,47 +1,36 @@
 "use client"
-import React, { useState } from "react";
-
-const tagSuggestions = ["Web", "Mobile", "AI", "Design", "Game", "Data Science"];
+import { useState } from "react";
+import useAuthorise from "@/app/auth/hooks/useAuthorise"
+import axios from "axios";
+import { useSelector } from "react-redux";
 
 const AddNewProject = () => {
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
-    const [tags, setTags] = useState([]);
-    const [thumbnail, setThumbnail] = useState(null);
-    const [tagInput, setTagInput] = useState("");
-    const [tagSuggestionsVisible, setTagSuggestionsVisible] = useState(false);
-
-    const handleTagInputChange = (event) => {
-        const inputValue = event.target.value;
-        setTagInput(inputValue);
-        setTagSuggestionsVisible(inputValue.trim().length > 0);
-    };
-
-    const handleTagSuggestionClick = (tag) => {
-        if (!tags.includes(tag)) {
-            setTags((prevTags) => [...prevTags, tag]);
-        }
-        setTagInput("");
-        setTagSuggestionsVisible(false);
-    };
-
+    const [project, setProject] = useState({
+        title: "",
+        description: "",
+        tags: [],
+        thumbnail: "",
+    })
+    const user = useSelector(store => store.user.user);
+    useAuthorise();
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Process the form data here, e.g., send it to the server
-        const newProject = {
-            title,
-            description,
-            tags,
-            thumbnail,
-        };
-        console.log(newProject);
-        // Clear the form fields after submission
-        setTitle("");
-        setDescription("");
-        setTags([]);
-        setThumbnail(null);
+        // setProject({
+        //     title: "",
+        //     description: "",
+        //     tags: [],
+        //     thumbnail: "",
+        // })
+        submitProject()
     };
 
+    const submitProject = async () => {
+        const res = await axios.post('/api/users/addProject', {
+            project,
+            email: user.email
+        });
+        console.log(res)
+    }
     return (
         <form
             className="w-full lg:w-1/2 bg-gray-200 p-4 absolute right-0"
@@ -56,8 +45,11 @@ const AddNewProject = () => {
                     type="text"
                     id="title"
                     name="title"
-                    value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    value={project.title}
+                    onChange={(e) => setProject({
+                        ...project,
+                        title: e.target.value
+                    })}
                     className="w-full border border-gray-300 rounded px-3 py-2"
                 />
             </div>
@@ -69,8 +61,11 @@ const AddNewProject = () => {
                 <textarea
                     id="description"
                     name="description"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
+                    value={project.description}
+                    onChange={(e) => setProject({
+                        ...project,
+                        description: e.target.value
+                    })}
                     className="w-full border border-gray-300 rounded px-3 py-2 resize-none"
                     rows="5"
                 />
@@ -84,23 +79,13 @@ const AddNewProject = () => {
                     type="text"
                     id="tags"
                     name="tags"
-                    value={tagInput}
-                    onChange={handleTagInputChange}
+                    value={project.tags}
+                    onChange={(e) => setProject({
+                        ...project,
+                        tags: e.target.value
+                    })}
                     className="w-full border border-gray-300 rounded px-3 py-2"
                 />
-                {tagSuggestionsVisible && (
-                    <ul className="mt-2 border border-gray-300 rounded">
-                        {tagSuggestions.map((tag) => (
-                            <li
-                                key={tag}
-                                onClick={() => handleTagSuggestionClick(tag)}
-                                className="cursor-pointer p-2 hover:bg-gray-100"
-                            >
-                                {tag}
-                            </li>
-                        ))}
-                    </ul>
-                )}
             </div>
 
             <div className="mb-4">
@@ -112,7 +97,11 @@ const AddNewProject = () => {
                     id="thumbnail"
                     name="thumbnail"
                     accept="image/*"
-                    onChange={(e) => setThumbnail(e.target.files[0])}
+                    onChange={
+                        (e) => setProject({
+                            ...project,
+                            thumbnail: e.target.files[0]
+                        })}
                     className="border border-gray-300 rounded px-3 py-2"
                 />
             </div>

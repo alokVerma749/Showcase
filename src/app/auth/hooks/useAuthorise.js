@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 const useAuthorise = () => {
-    console.log("it is here")
     const dispatch = useDispatch()
     useEffect(() => {
         fetchData();
