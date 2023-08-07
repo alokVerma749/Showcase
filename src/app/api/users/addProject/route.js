@@ -5,7 +5,7 @@ import { NextResponse } from "next/server"
 export async function POST(request) {
     const reqBody = await request.json()
     const { title, description, tags, thumbnail } = reqBody.project;
-    const email = reqBody.email
+    const { email, author } = reqBody
     const user = await User.findOne({ email })
     if (!user) {
         return NextResponse.json({
@@ -14,7 +14,8 @@ export async function POST(request) {
         })
     }
     const project = new Project({
-        userEmail: reqBody.email,
+        userEmail: email,
+        author: author,
         title: title,
         description: description,
         tags: tags,

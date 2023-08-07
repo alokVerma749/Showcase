@@ -5,6 +5,10 @@ const projectSchema = new mongoose.Schema({
         type: String,
         required: [true, "user email missing"]
     },
+    author: {
+        type: String,
+        required: [true, "author missing"]
+    },
     title: {
         type: String,
         required: [true, "title is required"]

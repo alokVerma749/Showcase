@@ -27,7 +27,8 @@ const AddNewProject = () => {
     const submitProject = async () => {
         await axios.post('/api/users/addProject', {
             project,
-            email: user.email
+            email: user.email,
+            author: user.name
         });
     }
     return (
