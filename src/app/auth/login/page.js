@@ -4,12 +4,16 @@ import Link from 'next/link';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
+import { useDispatch } from 'react-redux';
+import { login } from '@/utils/slices/userSlice';
+
 const Login = () => {
     const [userData, setUserData] = useState({
         email: "",
         password: "",
     })
     const router = useRouter()
+    const dispatch = useDispatch()
     const handleSubmit = (e) => {
         e.preventDefault();
         submitData();
@@ -18,6 +22,9 @@ const Login = () => {
         try {
             const res = await axios.post('/api/users/auth/login', userData);
             res.data.success && router.push("/profile");
+            dispatch(login({
+                isLoggedIn: true
+            }))
         } catch (error) {
             console.log(error.message);
         } finally {

@@ -73,7 +73,6 @@ export default function Home() {
       </section> */}
 
       <section className="projects">
-        <div className="filter"></div>
         <div className="project_container">
           {/* Floating Button */}
           <button
