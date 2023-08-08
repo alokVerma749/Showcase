@@ -11,7 +11,6 @@ export default function Home() {
   const [filteredData, setFilteredData] = useState(data);
   const [isFormVisible, setIsFormVisible] = useState(false)
 
-  // fix filter
   const filter = (tag) => {
     if (tag == "All") {
       return setFilteredData(data)
