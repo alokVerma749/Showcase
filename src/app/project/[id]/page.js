@@ -23,16 +23,27 @@ const Project = (request) => {
         fetchProjectDetails();
     }, [])
 
+    useEffect(() => {
+        fetchMoreProjects();
+    }, [data])
+
     const fetchProjectDetails = async () => {
         try {
-            const response = await axios.get(`/api/users/project/${id}`)
+            const response = await axios.get(`/api/users/project/${id}`);
             setData(response.data.res)
         } catch (error) {
             console.log(error)
         }
     }
-    const fetchMoreProjects = () => {
-        // create API which search all project with given email
+    const fetchMoreProjects = async () => {
+        console.log("executed")
+        try {
+            const userEmail = data.userEmail
+            const res = await axios.get(`/api/users/project/morefromauthor/${userEmail}`)
+            setProjects(res.data.response)
+        } catch (error) {
+            console.log(error.message)
+        }
     }
     return (
         (data._id) ? <div className="p-5 mx-auto sm:p-10 md:p-16 bg-gray-100 text-gray-800">
@@ -40,10 +51,10 @@ const Project = (request) => {
                 <img src={IMAGE_API + data.thumbnailid} alt="thumbnail" className="w-full h-60 sm:h-96 bg-gray-500" />
                 <div className="p-6 pb-12 m-4 mx-auto -mt-16 space-y-6 lg:max-w-2xl sm:px-10 sm:mx-12 lg:rounded-md bg-gray-50">
                     <div className="space-y-2">
-                        <a rel="noopener noreferrer" href="#" className="inline-block text-2xl font-semibold sm:text-3xl">{data.title}</a>
-                        <p className="text-xs text-gray-600">By
-                            <a rel="noopener noreferrer" href="#" className="text-xs hover:underline"> {data.author}</a>
-                        </p>
+                        <p className="inline-block text-2xl font-semibold sm:text-3xl">{data.title}</p>
+                        <div className="text-xs text-gray-600">By
+                            <p className="text-xs hover:underline"> {data.author}</p>
+                        </div>
                     </div>
                     <div className="text-gray-800">
                         <p>{data.description}</p>
@@ -54,8 +65,10 @@ const Project = (request) => {
                     </div>
                 </div>
             </div>
-            <MoreFromAuthor author={data.author} projects={projects} />
-        </div > : <h1>Loading...</h1>
+            {
+                projects.length > 0 ? <MoreFromAuthor author={data.author} projects={projects} /> : <p className='text-center text-xl m-3'>No more Data from Author Account</p>
+            }
+        </div > : <h1 className='text-center text-xl m-3'>Loading...</h1>
     )
 }
 
