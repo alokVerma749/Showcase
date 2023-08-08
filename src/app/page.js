@@ -117,7 +117,7 @@ export default function Home() {
           </div>
           <div className="cards flex flex-wrap flex-row">
             {
-              filteredData.length > 0 ? filteredData.map((data) => <Card key={data._id} data={data} />) : <p className='text-center text-xl m-3'>Empty</p>
+              filteredData.length > 0 ? filteredData.map((data) => <Card key={data._id} data={data} />) : <p className='mx-auto text-xl m-3'>Empty</p>
             }
           </div>
         </div>
