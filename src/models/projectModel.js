@@ -23,6 +23,12 @@ const projectSchema = new mongoose.Schema({
     image: {
         type: String
     },
+    liveLink: {
+        type: String
+    },
+    sourceLink: {
+        type: String
+    },
 })
 
 
