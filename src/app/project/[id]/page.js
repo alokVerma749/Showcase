@@ -18,8 +18,10 @@ const Project = (request) => {
         thumbnailid: ''
     })
     const [projects, setProjects] = useState([]);
+    const { id } = request.params;
+    // create api to fetch specific projects
     useEffect(() => {
-        const { id } = request.params;
+        fetchProjectDetails()
         const user = mockData.find(data => data.id == id)
         setData(user);
         // id DB is configured
@@ -28,6 +30,10 @@ const Project = (request) => {
         // for trial only
         setProjects(mockData);
     }, [])
+
+    const fetchProjectDetails = async () => {
+        const res = await axios.get('')
+    }
     return (
         (data.id) && (
             <div className="p-5 mx-auto sm:p-10 md:p-16 bg-gray-100 text-gray-800">

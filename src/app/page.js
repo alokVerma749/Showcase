@@ -1,12 +1,13 @@
 'use client'
 import Card from "@/app/components/Card"
 import { TAGS, mockData } from "@/utils/mockdata"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import AddNewProject from "./components/AddNewProject";
 import { useSelector } from "react-redux";
+import axios from "axios";
 
 export default function Home() {
-  const [data, setData] = useState(mockData);
+  const [data, setData] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(false)
 
   const filter = (tag) => {
@@ -27,6 +28,15 @@ export default function Home() {
 
   const user = useSelector(store => store.user.user);
 
+
+  useEffect(() => {
+    fetchAllProjects()
+  }, [])
+
+  const fetchAllProjects = async () => {
+    const res = await axios.get('/api/users/project')
+    setData(res.data.data);
+  }
   return (
     <main className="hero p-5">
       <div className="hero flex flex-row justify-around mb-5">
@@ -104,7 +114,7 @@ export default function Home() {
           </div>
           <div className="cards flex flex-wrap flex-row">
             {
-              data.map((data) => <Card key={data.id} data={data} />)
+              data.length > 0 ? data.map((data) => <Card key={data._id} data={data} />) : <p>Empty</p>
             }
           </div>
         </div>

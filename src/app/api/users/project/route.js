@@ -1,6 +1,6 @@
 import Project from "@/models/projectModel";
 import User from "@/models/userModel";
-import { NextResponse } from "next/server"
+import { NextResponse } from "next/server";
 
 export async function POST(request) {
     const reqBody = await request.json()
@@ -21,10 +21,32 @@ export async function POST(request) {
         tags: tags,
         thumbnail: thumbnail
     })
-    const res = await project.save()
-    console.log(res)
+    await project.save()
     return NextResponse.json({
         success: true,
         message: "Project added successfully"
     })
+}
+
+export async function GET() {
+    try {
+        const data = await Project.find({});
+        if (!data) {
+            return NextResponse.json({
+                success: false,
+                message: "data not found"
+            })
+        }
+        return NextResponse.json({
+            success: true,
+            message: "data fetched successfully",
+            data
+        })
+    } catch (error) {
+        console.log(error.message)
+        return NextResponse.json({
+            success: true,
+            message: error.message
+        })
+    }
 }
