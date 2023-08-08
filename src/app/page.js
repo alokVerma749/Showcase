@@ -1,6 +1,6 @@
 'use client'
 import Card from "@/app/components/Card"
-import { TAGS, mockData } from "@/utils/mockdata"
+import { TAGS } from "@/utils/mockdata"
 import { useEffect, useState } from "react"
 import AddNewProject from "./components/AddNewProject";
 import { useSelector } from "react-redux";
@@ -8,14 +8,16 @@ import axios from "axios";
 
 export default function Home() {
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState(data);
   const [isFormVisible, setIsFormVisible] = useState(false)
 
+  // fix filter
   const filter = (tag) => {
-    if (tag === "All") {
-      return setData(mockData)
+    if (tag == "All") {
+      return setFilteredData(data)
     }
-    const filteredResults = mockData.filter((data) => data.tags.includes(tag))
-    setData(filteredResults);
+    const filteredResults = data.filter((data) => data.tags.includes(tag.toLowerCase()))
+    setFilteredData(filteredResults);
   }
 
   const handleFloatingButtonClick = () => {
@@ -36,6 +38,7 @@ export default function Home() {
   const fetchAllProjects = async () => {
     const res = await axios.get('/api/users/project')
     setData(res.data.data);
+    setFilteredData(res.data.data)
   }
   return (
     <main className="hero p-5">
@@ -114,7 +117,7 @@ export default function Home() {
           </div>
           <div className="cards flex flex-wrap flex-row">
             {
-              data.length > 0 ? data.map((data) => <Card key={data._id} data={data} />) : <p className='text-center text-xl m-3'>Empty</p>
+              filteredData.length > 0 ? filteredData.map((data) => <Card key={data._id} data={data} />) : <p className='text-center text-xl m-3'>Empty</p>
             }
           </div>
         </div>
