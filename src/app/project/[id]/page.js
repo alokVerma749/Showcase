@@ -43,17 +43,17 @@ const Project = (request) => {
                     <div className="space-y-2">
                         <a rel="noopener noreferrer" href="#" className="inline-block text-2xl font-semibold sm:text-3xl">{data.title}</a>
                         <p className="text-xs text-gray-600">By
-                            <a rel="noopener noreferrer" href="#" className="text-xs hover:underline">{data.author}</a>
+                            <a rel="noopener noreferrer" href="#" className="text-xs hover:underline"> {data.author}</a>
                         </p>
                     </div>
                     <div className="text-gray-800">
                         <p>{data.description}</p>
                     </div>
                     <div className="links flex flex-row justify-center border border-red-500 space-x-5 p-3">
-                        <Link href="#" target="_blank" className='text-green-500 font-bold'>{"<live/>"}</Link>
-                        <Link href="#" target="_blank" className='text-green-500 font-bold'>{"<source/>"}</Link>
-                        {/* <Link href={data?.liveLink} target="_blank" className='text-green-500 font-bold'>{"<live/>"}</Link>
-                        <Link href={data?.sourceLink} target="_blank" className='text-green-500 font-bold'>{"<source/>"}</Link> */}
+                        {/* <Link href={projects?.liveLink} target="_blank" className='text-green-500 font-bold'>{"<live/>"}</Link>
+                        <Link href="#" target="_blank" className='text-green-500 font-bold'>{"<source/>"}</Link> */}
+                        <Link href={data?.liveLink} target="_blank" className='text-green-500 font-bold'>{"<live/>"}</Link>
+                        <Link href={data?.sourceLink} target="_blank" className='text-green-500 font-bold'>{"<source/>"}</Link>
                     </div>
                 </div>
             </div>

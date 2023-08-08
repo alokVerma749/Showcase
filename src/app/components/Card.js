@@ -15,7 +15,7 @@ const Card = ({ data }) => {
                     src={IMAGE_API + "237/200/300"} alt={title} />
                 <div className="p-6">
                     <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{tags.join(", ")}</h2>
-                    <h1 className="title-font text-lg font-medium text-gray-900 mb-3">{author}</h1>
+                    <h1 className="title-font text-lg font-medium text-gray-900 mb-3">{title}</h1>
                     <p className="leading-relaxed mb-3">{description}</p>
                     <div className="flex items-center flex-wrap ">
                         <Link href={`/project/${_id}`} className="text-indigo-500 inline-flex items-center md:mb-2 lg:mb-0">Learn More

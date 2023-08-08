@@ -35,7 +35,7 @@ const AddNewProject = () => {
     }
     return (
         <form
-            className="w-full lg:w-1/2 bg-gray-200 p-4 absolute right-0"
+            className="w-full lg:w-1/2 bg-gray-200 p-4 absolute right-0 top-0"
             onSubmit={handleSubmit}
         >
             <h1 className="p-3 text-3xl font-medium">Add New Project</h1>
@@ -108,14 +108,14 @@ const AddNewProject = () => {
             </div>
 
             <div className="my-4">
-                <label htmlFor="liveLink" className="block font-medium mb-1">
+                <label htmlFor="sourceLink" className="block font-medium mb-1">
                     Source Link:
                 </label>
                 <input
                     type="text"
                     id="sourceLink"
                     name="sourceLink"
-                    value={project.liveLink}
+                    value={project.sourceLink}
                     onChange={(e) => setProject({
                         ...project,
                         sourceLink: e.target.value
