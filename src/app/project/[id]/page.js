@@ -1,7 +1,6 @@
 "use client"
 
 import { IMAGE_API } from '@/utils/constants';
-import { mockData } from '@/utils/mockdata';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import MoreFromAuthor from '../components/MoreFromAuthor';
@@ -50,8 +49,6 @@ const Project = (request) => {
                         <p>{data.description}</p>
                     </div>
                     <div className="links flex flex-row justify-center border border-red-500 space-x-5 p-3">
-                        {/* <Link href={projects?.liveLink} target="_blank" className='text-green-500 font-bold'>{"<live/>"}</Link>
-                        <Link href="#" target="_blank" className='text-green-500 font-bold'>{"<source/>"}</Link> */}
                         <Link href={data?.liveLink} target="_blank" className='text-green-500 font-bold'>{"<live/>"}</Link>
                         <Link href={data?.sourceLink} target="_blank" className='text-green-500 font-bold'>{"<source/>"}</Link>
                     </div>

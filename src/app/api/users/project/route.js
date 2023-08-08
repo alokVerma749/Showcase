@@ -6,7 +6,6 @@ export async function POST(request) {
     const reqBody = await request.json()
     const { title, description, tags, thumbnail, liveLink, sourceLink } = reqBody.project;
     const { email, author } = reqBody
-    console.log(liveLink)
     const user = await User.findOne({ email })
     if (!user) {
         return NextResponse.json({
