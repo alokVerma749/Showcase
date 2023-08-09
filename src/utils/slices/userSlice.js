@@ -14,7 +14,7 @@ const userSlice = createSlice({
             state.user = {
                 name: action.payload.name,
                 email: action.payload.email,
-                isLoggedIn: true
+                isLoggedIn: action.payload.isLoggedIn
             }
         },
         logout: (state) => {

@@ -11,18 +11,22 @@ const useAuthorise = () => {
     const fetchData = async () => {
         try {
             const res = await axios.get('/api/users/auth/authorise');
-            const { name, email } = res.data
-            res ? dispatch(login({
-                name: name,
-                email: email,
-                isLoggedIn: true
-            })) : dispatch(login({
-                name: "",
-                email: "",
-                isLoggedIn: false
-            }))
+            const { success } = res.data
+            if (success) {
+                dispatch(login({
+                    name: res.data.name,
+                    email: res.data.email,
+                    isLoggedIn: true
+                }))
+            } else {
+                dispatch(login({
+                    name: "",
+                    email: "",
+                    isLoggedIn: false
+                }))
+            }
         } catch (error) {
-            console.log(error.message)
+            console.log(error)
             dispatch(login({
                 name: "",
                 email: "",
