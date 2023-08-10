@@ -9,10 +9,6 @@ import Header from './components/Header'
 import { Provider } from 'react-redux'
 import store from '@/utils/store'
 
-export const metadata = {
-  title: 'Alok Verma',
-  description: 'Alok Verma portfolio',
-}
 
 export default function RootLayout({ children }) {
   return (
