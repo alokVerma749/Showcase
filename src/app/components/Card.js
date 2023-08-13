@@ -1,4 +1,3 @@
-import { IMAGE_API } from '@/utils/constants'
 import Image from 'next/image'
 import Link from 'next/link'
 

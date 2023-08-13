@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 
@@ -5,10 +6,15 @@ const About = () => {
     return (
         <div className="flex flex-col items-center justify-center p-4">
             <div className="w-48 h-48 rounded-full overflow-hidden">
-                <img
+                <Image
                     className="object-cover w-full h-full"
+                    height={200}
+                    width={200}
+                    quality={75}
+                    priority={false}
                     src="https://avatars.githubusercontent.com/u/87599400?s=400&v=4"
                     alt="Profile"
+                    placeholder='alokverma'
                 />
             </div>
             <div className="mt-4 text-center space-y-3">
