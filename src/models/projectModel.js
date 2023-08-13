@@ -29,6 +29,9 @@ const projectSchema = new mongoose.Schema({
     sourceLink: {
         type: String
     },
+    thumbnail: {
+        type: String
+    },
 })
 
 

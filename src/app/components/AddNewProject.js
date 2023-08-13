@@ -9,25 +9,27 @@ const AddNewProject = () => {
         title: "",
         description: "",
         tags: [],
-        thumbnail: "",
+        liveLink: "",
+        sourceLink: "",
+        thumbnail: null
     })
     const user = useSelector(store => store.user.user);
     useAuthorise();
     const handleSubmit = (event) => {
         event.preventDefault();
-        setProject({
-            title: "",
-            description: "",
-            tags: [],
-            thumbnail: "",
-            liveLink: "",
-            sourceLink: ""
-        })
+        // setProject({
+        //     title: "",
+        //     description: "",
+        //     tags: [],
+        //     thumbnail: "",
+        //     liveLink: "",
+        //     sourceLink: ""
+        // })
         submitProject()
     };
 
     const submitProject = async () => {
-        await axios.post('/api/users/project', {
+        await axios.post('/api/users/project/addproject', {
             project,
             email: user.email,
             author: user.name
@@ -132,11 +134,19 @@ const AddNewProject = () => {
                     id="thumbnail"
                     name="thumbnail"
                     accept="image/*"
-                    onChange={
-                        (e) => setProject({
-                            ...project,
-                            thumbnail: e.target.files[0]
-                        })}
+                    onChange={(e) => {
+                        const selectedFile = e.target.files[0];
+                        if (selectedFile) {
+                            const reader = new FileReader();
+                            reader.onload = () => {
+                                setProject({
+                                    ...project,
+                                    thumbnail: reader.result // This is the base64-encoded data
+                                });
+                            };
+                            reader.readAsDataURL(selectedFile);
+                        }
+                    }}
                     className="border border-gray-300 rounded px-3 py-2"
                 />
             </div>

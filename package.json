@@ -20,6 +20,7 @@
     "install": "^0.13.0",
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.4.1",
+    "multer": "^1.4.5-lts.1",
     "next": "13.4.12",
     "nodemailer": "^6.9.4",
     "npm": "^9.8.1",

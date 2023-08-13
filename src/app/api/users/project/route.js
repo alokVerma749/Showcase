@@ -1,34 +1,5 @@
 import Project from "@/models/projectModel";
-import User from "@/models/userModel";
 import { NextResponse } from "next/server";
-
-export async function POST(request) {
-    const reqBody = await request.json()
-    const { title, description, tags, thumbnail, liveLink, sourceLink } = reqBody.project;
-    const { email, author } = reqBody
-    const user = await User.findOne({ email })
-    if (!user) {
-        return NextResponse.json({
-            success: false,
-            message: "user not found",
-        })
-    }
-    const project = new Project({
-        userEmail: email,
-        author: author,
-        title: title,
-        description: description,
-        tags: tags,
-        thumbnail: thumbnail,
-        liveLink: liveLink,
-        sourceLink: sourceLink
-    })
-    await project.save()
-    return NextResponse.json({
-        success: true,
-        message: "Project added successfully"
-    })
-}
 
 export async function GET() {
     try {

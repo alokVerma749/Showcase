@@ -18,8 +18,8 @@ export const config = {
     matcher: [
         '/',
         '/profile',
-        "/profile/:id*",
+        '/profile/:id*',
         '/auth/login',
-        '/auth/signup'
+        '/auth/signup',
     ]
 }

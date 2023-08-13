@@ -1,18 +1,18 @@
 import { IMAGE_API } from '@/utils/constants'
+import Image from 'next/image'
 import Link from 'next/link'
-// import Image from 'next/image'
-import React from 'react'
 
 const Card = ({ data }) => {
-    const { _id, title, author, description, tags, likeCount, commentCount, thumbnailid } = data
+    const { _id, title, author, description, tags, likeCount, commentCount, thumbnail } = data
     return (
         <div className="p-4 md:w-1/3">
             <div className="h-full border-2 border-gray-200 border-opacity-60 rounded-lg overflow-hidden">
-                <img
+                <Image
                     width={100}
                     height={200}
                     className="lg:h-48 md:h-36 w-full object-cover object-center"
-                    src={IMAGE_API + "237/200/300"} alt={title} />
+                    src={"http://res.cloudinary.com/dv1fxqrsi/image/upload/v1691949903/" + thumbnail}
+                    alt={title} />
                 <div className="p-6">
                     <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">{tags.join(", ")}</h2>
                     <h1 className="title-font text-lg font-medium text-gray-900 mb-3">{title}</h1>
