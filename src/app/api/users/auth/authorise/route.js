@@ -13,9 +13,7 @@ export async function GET(request) {
                 message: "token not found",
             }, { status: 404 })
         }
-        console.log("Get token is " + getToken)
         const token = getToken.value
-        console.log("token is " + token)
         let response = NextResponse.json({});
         Jwt.verify(token, process.env.JWT_SECRET_KEY, function (err, decoded) {
             if (err) {

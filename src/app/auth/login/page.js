@@ -21,7 +21,7 @@ const Login = () => {
     const submitData = async () => {
         try {
             const res = await axios.post('/api/users/auth/login', userData);
-            res.data.success && router.refresh();
+            res.data.success && router.push("/profile");
             dispatch(login({
                 isLoggedIn: true
             }))
