@@ -2,11 +2,14 @@ import Jwt from "jsonwebtoken"
 import { NextResponse } from "next/server"
 
 import { connect } from "@/dbConfig/dbConfig"
+import { cookies } from "next/dist/client/components/headers";
 connect();
 
 export async function GET(request) {
+    'use server'
     try {
-        const getToken = request.cookies.get("showcaseToken")
+        // const getToken = request.cookies.get("showcaseToken")
+        const getToken = cookies().get("showcaseToken")
         if (!getToken) {
             return NextResponse.json({
                 success: false,
@@ -39,7 +42,7 @@ export async function GET(request) {
     } catch (error) {
         return NextResponse.json({
             success: false,
-            message: "authorisation failed"
+            message: error.message
         }, { status: 403 })
     }
 }
