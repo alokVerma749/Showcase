@@ -41,7 +41,7 @@ export async function POST(request) {
         message: 'logged in',
         token: token
     }, { status: 200 })
-    response.cookies.set("token", token, {
+    response.cookies.set("showcaseToken", token, {
         httpOnly: true
     })
     return response;

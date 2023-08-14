@@ -6,7 +6,7 @@ connect();
 
 export async function GET(request) {
     try {
-        const getToken = request.cookies.get("token")
+        const getToken = request.cookies.get("showcaseToken")
         if (!getToken) {
             return NextResponse.json({
                 success: false,
@@ -21,7 +21,7 @@ export async function GET(request) {
                     success: false,
                     message: err.message
                 }, { status: 403 })
-                response.cookies.set("token", "", {
+                response.cookies.set("showcaseToken", "", {
                     httpOnly: true,
                     expires: new Date(0)
                 })
