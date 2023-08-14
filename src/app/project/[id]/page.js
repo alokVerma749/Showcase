@@ -1,10 +1,10 @@
 "use client"
 
-import { IMAGE_API } from '@/utils/constants';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react'
 import MoreFromAuthor from '../components/MoreFromAuthor';
 import axios from 'axios';
+import Image from 'next/image';
 
 const Project = (request) => {
     const [data, setData] = useState({
@@ -15,7 +15,7 @@ const Project = (request) => {
         tags: [],
         likeCount: null,
         commentCount: null,
-        thumbnailid: ''
+        thumbnail: ''
     })
     const [projects, setProjects] = useState([]);
     const { id } = request.params;
@@ -36,7 +36,6 @@ const Project = (request) => {
         }
     }
     const fetchMoreProjects = async () => {
-        console.log("executed")
         try {
             const userEmail = data.userEmail
             const res = await axios.get(`/api/users/project/morefromauthor/${userEmail}`)
@@ -48,7 +47,13 @@ const Project = (request) => {
     return (
         (data._id) ? <div className="p-5 mx-auto sm:p-10 md:p-16 bg-gray-100 text-gray-800">
             <div className="flex flex-col max-w-3xl mx-auto overflow-hidden rounded">
-                <img src={IMAGE_API + data.thumbnailid} alt="thumbnail" className="w-full h-60 sm:h-96 bg-gray-500" />
+                <Image
+                    src={"http://res.cloudinary.com/dv1fxqrsi/image/upload/v1691949903/" + data.thumbnail}
+                    alt="thumbnail"
+                    className="w-full h-60 sm:h-96 bg-gray-500"
+                    width={1024}
+                    height={1096}
+                />
                 <div className="p-6 pb-12 m-4 mx-auto -mt-16 space-y-6 lg:max-w-2xl sm:px-10 sm:mx-12 lg:rounded-md bg-gray-50">
                     <div className="space-y-2">
                         <p className="inline-block text-2xl font-semibold sm:text-3xl">{data.title}</p>
