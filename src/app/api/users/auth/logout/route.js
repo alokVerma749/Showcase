@@ -7,7 +7,7 @@ export async function GET() {
             success: true
         }, { status: 200 })
         response.cookies.set("showcaseToken", "", {
-            httpOnly: true,
+            secure: true,
             expires: new Date(0)
         })
         return response;
