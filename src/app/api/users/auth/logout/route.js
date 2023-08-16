@@ -6,10 +6,7 @@ export async function GET() {
             message: "Logout successfull",
             success: true
         }, { status: 200 })
-        response.cookies.set("showcaseToken", "", {
-            secure: true,
-            expires: new Date(0)
-        })
+        response.cookies.delete("showcaseToken");
         return response;
     } catch (error) {
         return NextResponse.json({
