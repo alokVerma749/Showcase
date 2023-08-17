@@ -1,5 +1,5 @@
 'use client'
-export const revalidate = 5
+export const revalidate = 0
 import Card from "@/app/components/Card"
 import { TAGS } from "@/utils/mockdata"
 import { useEffect, useState } from "react"
