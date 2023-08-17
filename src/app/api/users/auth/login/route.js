@@ -41,6 +41,7 @@ export async function POST(request) {
         message: 'logged in',
         token: token
     }, { status: 200 })
-    response.cookies.set("showcaseToken", token, { secure: true })
+    const oneDay = 24 * 60 * 60 * 1000
+    response.cookies.set("showcaseToken", token, { secure: true, httpOnly: true, expires: Date.now() + oneDay })
     return response;
 }

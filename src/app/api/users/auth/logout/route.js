@@ -8,7 +8,9 @@ export async function GET() {
             message: "Logout successfull",
             success: true
         }, { status: 200 })
-        cookies().set('showcaseToken', '', { expires: Date.now() })
+        console.log(cookies().get("showcaseToken"))
+        cookies().set('showcaseToken', '', { secure: true, htttpOnly: true, expires: Date.now() })
+        console.log(cookies().get("showcaseToken"))
         return response;
     } catch (error) {
         return NextResponse.json({
