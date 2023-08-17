@@ -1,4 +1,6 @@
 import Project from "@/models/projectModel";
+import { connect } from "@/dbConfig/dbConfig"
+connect()
 import { NextResponse } from "next/server";
 
 export async function GET() {
