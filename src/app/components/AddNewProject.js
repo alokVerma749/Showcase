@@ -13,18 +13,20 @@ const AddNewProject = () => {
         sourceLink: "",
         thumbnail: null
     })
+    const [requestStatus, setRequestStatus] = useState(false)
     const user = useSelector(store => store.user.user);
     useAuthorise();
     const handleSubmit = (event) => {
+        setRequestStatus(true)
         event.preventDefault();
-        // setProject({
-        //     title: "",
-        //     description: "",
-        //     tags: [],
-        //     thumbnail: "",
-        //     liveLink: "",
-        //     sourceLink: ""
-        // })
+        setProject({
+            title: "",
+            description: "",
+            tags: [],
+            thumbnail: "",
+            liveLink: "",
+            sourceLink: ""
+        })
         submitProject()
     };
 
@@ -34,6 +36,7 @@ const AddNewProject = () => {
             email: user.email,
             author: user.name
         });
+        setRequestStatus(false)
     }
     return (
         <form
@@ -152,10 +155,11 @@ const AddNewProject = () => {
             </div>
 
             <div>
+
                 <button
                     type="submit"
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 py-2 rounded"
-                >
+                    disabled={requestStatus === true}
+                    className={`font-medium px-4 py-2 rounded ${requestStatus ? "bg-gray-600 text-gray-700 " : "bg-blue-500 hover:bg-blue-600 text-white"} `}                >
                     Add
                 </button>
             </div>
